@@ -49,7 +49,7 @@ def test_fm18_search(page):
     buy_button = page.locator('.printPrice .cart input[type="button"]').first
     buy_button.click() 
 
-    page.wait_for_timeout(2000)
+    page.wait_for_timeout(test_timeout / 3)
     
     # Переходим в саму корзину
     basket_icon = page.locator("#cart a").first
@@ -59,8 +59,6 @@ def test_fm18_search(page):
         page.wait_for_load_state("networkidle")
     except TimeoutError:
         page.evaluate("window.stop()")      
-    
-    page.wait_for_timeout(9000)
     
     assert "simplecheckout" in page.url, "Не удалось перейти на страницу корзины"
     
